@@ -1,23 +1,24 @@
 #Solution
-def solution(S):
+def solution(A, B):
 
-    # 이름 순서래도 오른차순으로 정렬
-    S.sort()
-
-    # 딕셔너리 초기화
     dict = {}
 
-    # 딕셔너리에 하나씩 추가하면서 이미 존재하면 value 1씩 증가
-    for key in S:
-        if key in dict:
-            dict[key] += 1
-        else :
-            dict[key] = 1
+    for b in B:
+        dict[b] = 1
 
-    for key in dict:
-        print(f"{key} {dict[key]}")
+    C = []
+
+    for a in A:
+        if a not in dict:
+            C.append(a)
+
+    C.sort()
+
+    for c in C:
+        print(c)
 
 # input
-S = list(input().strip().split())
+A = list(input().strip().split())
+B = list(input().strip().split())
 
-solution(S)
+solution(A,B)
