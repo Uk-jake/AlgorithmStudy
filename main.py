@@ -1,22 +1,23 @@
 #Solution
-def solution(n, m, dict, b):
-    result = 0
+def solution(S):
 
-    for item in b:
-        if item in dict:
-            result = result + dict[item]
+    # 이름 순서래도 오른차순으로 정렬
+    S.sort()
 
-    return result
+    # 딕셔너리 초기화
+    dict = {}
+
+    # 딕셔너리에 하나씩 추가하면서 이미 존재하면 value 1씩 증가
+    for key in S:
+        if key in dict:
+            dict[key] += 1
+        else :
+            dict[key] = 1
+
+    for key in dict:
+        print(f"{key} {dict[key]}")
 
 # input
-n, m = map(int, input().strip().split())
+S = list(input().strip().split())
 
-dict = {}
-
-for i in range(n):
-    name, price = input().strip().split()
-    dict[name] = int(price)
-
-b = list(input().strip().split())
-
-print(solution(n,m,dict,b))
+solution(S)
