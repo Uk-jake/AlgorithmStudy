@@ -1,17 +1,22 @@
+#Solution
+def solution(n, m, dict, b):
+    result = 0
+
+    for item in b:
+        if item in dict:
+            result = result + dict[item]
+
+    return result
+
+# input
 n, m = map(int, input().strip().split())
 
-dic = {}
+dict = {}
 
-for i in range(5):
-    key, value = map(str, input().strip().split())
-    dic[key] = int(value)
+for i in range(n):
+    name, price = input().strip().split()
+    dict[name] = int(price)
 
-array = input().strip().split()
+b = list(input().strip().split())
 
-result = 0
-
-for a in array:
-    result = result + dic[a]
-
-print(result)
-print(result)
+print(solution(n,m,dict,b))
