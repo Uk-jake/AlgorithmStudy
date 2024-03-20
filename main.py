@@ -1,24 +1,45 @@
 import queue
-
 #Solution
-def solution(A, B):
+def solution(n, S):
 
-    que = queue.Queue()
-    mx, number = 0, A
+    que1 = queue.Queue()
+    que2 = queue.Queue()
+    A,B,C = [],[],[]
 
-    for i in range(A):
-        if B[i][0] == 1:
-            que.put(B[i][1])
-            if mx < que.qsize() or (mx == que.qsize() and number > B[i][1]):
-                mx = que.qsize()
-                number = B[i][1]
-        elif B[i][0] == 2:
-            que.get()
+    for item in S:
+        if item[0] == 1:
+            que1.put(item[1])
+            que2.put(item[2])
+        elif item[0] == 2:
+            # item[1] - 준비된 음식 종류
+            number = que1.get()
+            want = que2.get()
+            if item[1] == want:
+                A.append(number)
+            else :
+                B.append(number)
 
-    print(mx, number)
+    if que1.qsize() > 0:
+        for i in range(que1.qsize()):
+            C.append(que1.get())
+        C.sort()
+    elif que1.qsize() == 0:
+        C.append("None")
+
+    A.sort()
+    B.sort()
+
+    for a in A:
+        print(f"{a}", end=" ")
+    print("")
+    for b in B:
+        print(f"{b}", end=" ")
+    print("")
+    for c in C:
+        print(f"{c}", end=" ")
 
 # input
-A = int(input())
-B = list(list(map(int, input().strip().split())) for _ in range(A))
+n = int(input())
+S = list(list(map(int, input().strip().split())) for _ in range(n))
 
-solution(A,B)
+solution(n,S)
