@@ -1,32 +1,24 @@
+import queue
+
 #Solution
 def solution(A, B):
 
-    dict = {}
-    mx = 0
+    que = queue.Queue()
+    mx, number = 0, A
 
-    for b in B:
-        if b in dict:
-            dict[b] += 1
-        else:
-            dict[b] = 1
-        #max 함수 사용
-        mx = max(mx,dict[b])
+    for i in range(A):
+        if B[i][0] == 1:
+            que.put(B[i][1])
+            if mx < que.qsize() or (mx == que.qsize() and number > B[i][1]):
+                mx = que.qsize()
+                number = B[i][1]
+        elif B[i][0] == 2:
+            que.get()
 
-    result = []
-
-    # dict.item()의 출력 결과는 key,value 값을 2차원 리스트로 반환함.
-    # for에 2차원 리스트를 사용하면 한 행의 2개의 열 값을 인자로 사용 가능 함.
-    for key, value in dict.items():
-        if value == mx:
-            result.append(key)
-
-    result.sort()
-
-    for i in result:
-        print(f"{i}", end=" ")
+    print(mx, number)
 
 # input
 A = int(input())
-B = list(map(int, input().strip().split()))
+B = list(list(map(int, input().strip().split())) for _ in range(A))
 
 solution(A,B)
