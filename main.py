@@ -1,26 +1,29 @@
 #Solution
 def solution(A, B):
 
+    dict = {}
     C = []
 
+    for a in A:
+        if a in dict:
+            dict[a] += 1
+        else:
+            dict[a] = 1
+
     for b in B:
-        count = 0
-        for a in A:
-            if b <= a:
-                count += 1
-        C.append(count)
+        if b in dict:
+            C.append(dict[b])
+        else:
+            C.append(len(A))
 
-    for c in C:
-        print(c)
-
-
+    return C
 
 # input
 n, m = map(int,input().strip().split())
-A = list(map(int,input().strip().split()))
-#B = []
-#for i in range(m):
-#    B.append(int(input().strip()))
-B = list(int(input().strip()) for _ in range(m))
+answer = list(input().strip().split())
+question = list(input().strip() for _ in range(m))
 
-solution(A,B)
+result = solution(answer,question)
+
+for item in result:
+    print(item)
