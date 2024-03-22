@@ -1,29 +1,31 @@
 #Solution
 def solution(A, B):
 
-    dict = {}
     C = []
 
-    for a in A:
-        if a in dict:
-            dict[a] += 1
-        else:
-            dict[a] = 1
-
     for b in B:
-        if b in dict:
-            C.append(dict[b])
-        else:
-            C.append(len(A))
+        if b[0] == 1:
+            for i in range(b[1],b[2]+1):
+                A[i] += b[3]
+        elif b[0] == 2:
+            count = 0
+            for a in A[b[1]:b[2]+1]:
+                count += a
+            C.append(count)
 
     return C
 
+
 # input
-n, m = map(int,input().strip().split())
-answer = list(input().strip().split())
-question = list(input().strip() for _ in range(m))
+n , m = map(int, input().strip().split())
+A = list(map(int,input().strip().split()))
+B = list(list(map(int,input().strip().split())) for _ in range(m))
 
-result = solution(answer,question)
+# print(n, m)
+# print(A)
+# print(B)
 
-for item in result:
+answer = solution(A,B)
+
+for item in answer:
     print(item)
