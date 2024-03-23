@@ -1,26 +1,22 @@
+import itertools
+
 # Solution
 def solution(A):
 
-    time = [0] * 3600
+    per = list(itertools.permutations(A,len(A)))
+    answer = []
 
-    for a in A:
-        if a[0] == '1':
-            t1 = translate_time(a[1])
-            t2 = translate_time(a[2])
-            for i in range(t1, t2):
-                time[i] += 1
+    for item in per:
+        tmp = ''.join(item)
+        answer.append(tmp)
 
-        elif a[0] == '2':
-            t1 = translate_time(a[1])
-            print(time[t1])
+    answer.sort()
 
-    return 0
+    for a in answer:
+        print(a)
 
-def translate_time(t):
-    return int(t[:2])*60 + int(t[3:])
+
 
 # input
-n = int(input().strip())
-A = list(input().strip().split() for _ in range(n))
-
+A = list(input().strip())
 solution(A)
